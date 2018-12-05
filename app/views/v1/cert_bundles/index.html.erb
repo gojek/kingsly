@@ -1,0 +1,4 @@
+<h1>List of SSL Certificates</h1>
+<% V1::CertBundle.all.each do |cert_bundle| %>
+  FQDN: <%= cert_bundle.fqdn %><br>
+<% end %>

@@ -19,7 +19,9 @@ module Kingsly
     end
 
     config.load_defaults 5.2
-    config.logger = Logger.new(STDOUT)
+    logger = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
     config.logger.level = Logger::ERROR
 
     # Settings in config/environments/* take precedence over those specified here.
