@@ -1,0 +1,38 @@
+body {
+  margin-top: 50px;
+}
+
+.navigation-bar{
+  overflow: hidden;
+}
+
+
+.navbar-fixed-top {
+  top: 0;
+  border-width: 0 0 1px;
+}
+
+.navbar-inverse {
+  background-color: #222;
+  border-color: #090909;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #333333;
+  background-color: #fff;
+  margin-top: 0px;
+}
+
+// body {
+//   background-color: #fff;
+//   color: #333;
+//   margin: 33px;
+// }
+// .signed-in {
+//   margin-top: 15px;
+//   float: right;
+//   color: #ffffff;
+// }

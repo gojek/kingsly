@@ -4,3 +4,5 @@ AWS_REGION: "ap-east-1"
 ACME_CLIENT_PRIVATE_KEY: "-----BEGIN RSA PRIVATE KEY-----\nMIIJ...-----END RSA PRIVATE KEY-----\n"
 ACME_CLIENT_CONTACT: "mailto:abc@gmail.com"
 ACME_CLIENT_DIR: "https://acme.letsencrypt/directory"
+USERNAME: 'username'
+PASSWORD: 'password'
