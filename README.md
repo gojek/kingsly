@@ -1,5 +1,8 @@
 # Kingsly
 
+<p align="center">
+  <a href="https://travis-ci.org/gojekfarm/kingsly"><img src="https://travis-ci.org/gojekfarm/kingsly.svg?branch=master" alt="Build Status"></img></a>
+</p>
 An attempt to automate SSL certs management
 
 ## Dev Setup
