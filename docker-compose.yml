@@ -12,6 +12,8 @@ services:
      - 'bundle_cache:/bundle'
     environment:
     - RAILS_ENV=development
+    env_file:
+      - config/application.yml
     working_dir: /usr/src/app
     entrypoint: [/docker-entrypoint.sh]
     command: ["bundle", "exec", "rails", "s", "-p", "8080", "-b", "0.0.0.0"]
