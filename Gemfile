@@ -18,6 +18,7 @@ gem 'aws-sdk', '~> 2'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'slim'
+gem 'mini_racer'
 
 gem 'web-console', group: :development
 
