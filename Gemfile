@@ -17,6 +17,7 @@ gem 'acme-client'
 gem 'aws-sdk', '~> 2'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'slim'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
