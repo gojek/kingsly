@@ -2,22 +2,17 @@ br
 br
 h1
  | List of SSL Certificates
-table.table
+table.table.table-striped
   thead
     tr
       th
        | FQDN
       th
-       | Cert Expiry Date
-      th
-       | Last Renewal Date
+       | Expiry Date
   tbody
     - V1::CertBundle.all.each do |cert_bundle|
       tr
         td
           = cert_bundle.fqdn
         td
-          | 
-        td
-          | 
-
+          = cert_bundle.updated_at + 3.months
