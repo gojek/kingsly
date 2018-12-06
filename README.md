@@ -16,6 +16,7 @@ An attempt to automate SSL certs management
   - Request:
 ```
 curl -X POST http://kingsly.host/v1/cert_bundles \
+  -u admin:password \
   -H 'Content-Type: application/json' \
   -d '{
         "top_level_domain":"your-domain.com",
