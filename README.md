@@ -3,7 +3,14 @@
 <p align="center">
   <a href="https://travis-ci.org/gojekfarm/kingsly"><img src="https://travis-ci.org/gojekfarm/kingsly.svg?branch=master" alt="Build Status"></img></a>
 </p>
-An attempt to automate SSL certs management
+
+
+An attempt to automate SSL certs management. This Cert manager helps generate SSL certs, renews them automatically (WIP: #1) and tracks if the client has the updated certs (WIP: #2)
+
+#### Assumptions
+
+- The FQDN points to a public IP address
+- An FQDN points to only one IP address
 
 ## Dev Setup
 
