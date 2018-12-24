@@ -5,7 +5,7 @@
 </p>
 
 
-An attempt to automate SSL certs management. This Cert manager helps generate SSL certs, renews them automatically (WIP: #1) and tracks if the client has the updated certs (WIP: #2)
+An attempt to automate SSL certs management. This Cert manager helps generate SSL certs, renews them automatically (WIP: [#4](https://github.com/gojekfarm/kingsly/issues/4)) and tracks if the client has the updated certs (WIP: [#5](https://github.com/gojekfarm/kingsly/issues/5))
 
 #### Assumptions
 
