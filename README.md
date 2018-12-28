@@ -37,8 +37,8 @@ curl -X POST http://kingsly.host/v1/cert_bundles \
 
 ```
 '{
-  "private_key":"-----BEGIN RSA PRIVATE KEY-----\nMI...\n-----END RSA PRIVATE KEY-----\n",
-  "full_chain":"-----BEGIN CERTIFICATE-----\nMIIG...\n-----END RSA PRIVATE KEY-----\n"
+  "private_key":"-----BEGIN RSA PRIVATE KEY-----\nFOO...\n-----END RSA PRIVATE KEY-----\n",
+  "full_chain":"-----BEGIN CERTIFICATE-----\nBAR...\n-----END CERTIFICATE-----\n"
 }'
 ```
 

@@ -6,7 +6,7 @@ class AwsService
     )
   end
 
-  def create_route53_record!(top_level_domain, fqdn, record_content, record_type)
+  def update_route53_record!(top_level_domain, fqdn, record_content, record_type)
     hosted_zone_id = get_hosted_zone_id!(top_level_domain)
 
     resp = @aws_client.change_resource_record_sets({

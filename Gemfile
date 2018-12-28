@@ -19,6 +19,7 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'slim'
 gem 'mini_racer'
+gem 'clockwork'
 
 gem 'web-console', group: :development
 

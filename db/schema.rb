@@ -10,14 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_05_131557) do
+ActiveRecord::Schema.define(version: 2018_12_28_092556) do
 
   create_table "v1_cert_bundles", force: :cascade do |t|
-    t.text "fqdn"
     t.text "private_key"
     t.text "full_chain"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "top_level_domain"
+    t.text "sub_domain"
   end
 
 end

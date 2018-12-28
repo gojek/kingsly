@@ -6,3 +6,5 @@ ACME_CLIENT_CONTACT: "mailto:abc@gmail.com"
 ACME_CLIENT_DIR: "https://acme.letsencrypt/directory"
 USERNAME: 'username'
 PASSWORD: 'password'
+CERT_BUNDLE_RENEWAL_PERIOD_IN_SECONDS: '86400'
+CERT_BUNDLE_EXPIRY_BUFFER_IN_DAYS: '14'
