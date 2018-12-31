@@ -13,3 +13,8 @@
 .byebug_history
 /config/master.key
 /config/application.yml
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+*.swp
