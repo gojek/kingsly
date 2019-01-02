@@ -1,13 +1,21 @@
 language: ruby
-services:
-  - postgresql
 rvm:
   - 2.3.1
+
+services:
+  - docker
+  - postgresql
 
 before_script:
   - psql -c 'create database kingsly_test;' -U postgres
   - cp config/application.yml.ci config/application.yml
   - bundle exec rake db:create db:migrate
+
 script:
   - bundle
   - bundle exec rspec
+
+after_success:
+  - commit=$(git rev-parse HEAD)
+  - docker build gojektech/kingsly:$commit .
+
