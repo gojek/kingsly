@@ -1,0 +1,15 @@
+AWS_ACCESS_KEY_ID: "access-key"
+AWS_SECRET_ACCESS_KEY: "secret-key"
+AWS_REGION: "ap-east-1"
+ACME_CLIENT_PRIVATE_KEY: "-----BEGIN RSA PRIVATE KEY-----\nMII...T8=\n-----END RSA PRIVATE KEY-----\n"
+ACME_CLIENT_CONTACT: "mailto:abc@gmail.com"
+ACME_CLIENT_DIR: "https://acme-staging-v02.api.letsencrypt.org/directory"
+USERNAME: 'admin'
+PASSWORD: 'admin-password'
+CERT_BUNDLE_RENEWAL_PERIOD_IN_SECONDS: '1'
+CERT_BUNDLE_EXPIRY_BUFFER_IN_DAYS: '10'
+DB_NAME: 'kingsly_ci'
+DB_USERNAME: 'postgres'
+DB_PASWORD: ''
+DB_CONN_POOL: '5'
+DB_TIMEOUT: '5000'
