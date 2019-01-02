@@ -1,12 +1,16 @@
 sudo: required
+
 language: ruby
 rvm:
   - ruby-2.3.1
+services:
+  - docker
 
 before_script:
-  - docker-compose build
+  - docker-compose run kingsly-server
 script:
-  - rake spec
+  - bundle exec rake
+
 after_success:
 deploy:
   provider: releases
