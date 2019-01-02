@@ -6,7 +6,7 @@ rvm:
 
 before_script:
   - psql -c 'create database kingsly_test;' -U postgres
-  - rake db:create db:migrate
+  - bundle exec rake db:create db:migrate
 script:
   - bundle
   - bundle exec rspec
