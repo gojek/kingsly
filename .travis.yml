@@ -16,6 +16,8 @@ script:
   - bundle exec rspec
 
 after_success:
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - commit=$(git rev-parse HEAD)
-  - docker build gojektech/kingsly:$commit .
+  - docker build -t gojektech/kingsly:$commit .
+  - docker push gojektech/kingsly:$commit
 
