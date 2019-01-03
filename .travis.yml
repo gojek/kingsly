@@ -18,6 +18,6 @@ script:
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - commit=$(git rev-parse HEAD)
-  - docker build -t gojektech/kingsly:$commit .
-  - docker push gojektech/kingsly:$commit
+  - docker build -t gojekfarm/kingsly:$commit .
+  - docker push gojekfarm/kingsly:$commit
 
