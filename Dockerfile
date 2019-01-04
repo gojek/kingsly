@@ -7,8 +7,6 @@ WORKDIR /usr/src/app
 COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
-# COPY Gemfile /usr/src/app
-# COPY Gemfile.lock  /usr/src/app
 RUN bundle install
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["rails", "s", "-p", "8080", "-b", "0.0.0.0"]
