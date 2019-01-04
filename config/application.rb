@@ -23,6 +23,7 @@ module Kingsly
     logger.formatter = config.log_formatter
     config.logger = ActiveSupport::TaggedLogging.new(logger)
     config.logger.level = Logger::ERROR
+    config.web_console.whitelisted_ips = ['0.0.0.0/0']
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
