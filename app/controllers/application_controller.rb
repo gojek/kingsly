@@ -1,3 +1,9 @@
 class ApplicationController < ActionController::Base
-  http_basic_authenticate_with name: ENV['USERNAME'], password: ENV['PASSWORD']
+  before_action :http_basic_authenticate
+
+  def http_basic_authenticate
+    authenticate_with_http_basic do |name, password|
+      name == ENV['USERNAME'] && password == ENV['PASSWORD']
+    end
+  end
 end
