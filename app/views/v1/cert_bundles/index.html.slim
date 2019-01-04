@@ -13,6 +13,6 @@ table.table.table-striped
     - V1::CertBundle.all.each do |cert_bundle|
       tr
         td
-          = cert_bundle.fqdn
+          = cert_bundle.sub_domain + '.' + cert_bundle.top_level_domain
         td
           = cert_bundle.updated_at + 3.months
