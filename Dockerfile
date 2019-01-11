@@ -8,5 +8,6 @@ COPY ./docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 
 RUN bundle install
+RUN bundle exec rake assets:precompile --trace
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["rails", "s", "-p", "8080", "-b", "0.0.0.0"]
