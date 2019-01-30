@@ -5,6 +5,10 @@ class V1::CertBundle < ApplicationRecord
   def obtain_or_renew
     self.errors.add(:sub_domain, message: "Cannot be empty") and return if sub_domain.nil?
     self.errors.add(:top_level_domain, message: "Cannot be empty") and return if top_level_domain.nil?
+    unless self.needs_renewal?
+      Rails.logger.debug("Not updating cert bundle for fqdn: #{self.sub_domain}.#{self.top_level_domain}, not expiring within given buffer time")
+      return
+    end
 
     begin
       fqdn = "#{sub_domain}.#{top_level_domain}"
@@ -34,5 +38,11 @@ class V1::CertBundle < ApplicationRecord
       Rails.logger.error("[FAILED] Standard Error: #{error.message}")
       self.errors.add(:standard_error, message: "#{error.message}")
     end
+  end
+
+  def needs_renewal?
+    return true if self.full_chain.blank?
+    x509 = OpenSSL::X509::Certificate.new(self.full_chain)
+    x509.not_after < Time.now + ENV["CERT_BUNDLE_EXPIRY_BUFFER_IN_DAYS"].to_i.days
   end
 end
