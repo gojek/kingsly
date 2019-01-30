@@ -12,7 +12,7 @@ class V1::CertBundlesController < ApplicationController
       render status: 200, body: {private_key: cert_bundle.private_key, full_chain: cert_bundle.full_chain}.to_json
     else
       Rails.logger.error("[FAILED] Obtaining cert bundle: #{cert_bundle.errors.full_messages}")
-      render status: 500, body: "error obtaining certs"
+      render status: 500, body: {message: 'error obtaining certs'}.to_json
     end
   end
 end

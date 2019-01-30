@@ -18,3 +18,4 @@
 /config/master.key
 
 *.swp
+.idea/*
