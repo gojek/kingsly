@@ -44,7 +44,7 @@ RSpec.describe V1::CertBundlesController, type: :controller do
         post :create, params: { "top_level_domain" => top_level_domain, "sub_domain" => sub_domain}
 
         expect(response.status).to eq(500)
-        expect(response.body).to eq("error obtaining certs")
+        expect(response.body).to eq({ message:'error obtaining certs'}.to_json)
       end
     end
   end
