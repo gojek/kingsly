@@ -1,12 +1,10 @@
 class AcmeService
   def initialize
     acme_client_private_key = OpenSSL::PKey::RSA.new(ENV["ACME_CLIENT_PRIVATE_KEY"])
-    @acme_client = Acme::Client.new(private_key: acme_client_private_key, directory: ENV["ACME_CLIENT_DIR"])
+    @acme_client = Acme::Client.new(private_key: acme_client_private_key, directory: ENV["ACME_CLIENT_DIR"], kid: ENV["ACME_KID"])
   end
 
   def create_order(fqdn)
-    @acme_client.new_account(contact: ENV["LETSENCRYPT_CONTACT"], terms_of_service_agreed: true)
-
     Rails.logger.info("created dns challenge")
     @acme_order = @acme_client.new_order(identifiers: [fqdn])
   end
