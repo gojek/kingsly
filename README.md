@@ -5,7 +5,8 @@
 </p>
 
 
-An attempt to automate SSL certs management. This Cert manager helps generate SSL certs, renews them automatically (WIP: [#4](https://github.com/gojekfarm/kingsly/issues/4)) and tracks if the client has the updated certs (WIP: [#5](https://github.com/gojekfarm/kingsly/issues/5))
+An attempt to automate SSL certs management. This Cert manager helps generate SSL certs, renews them automatically.
+
 
 #### Assumptions
 
@@ -45,3 +46,8 @@ curl -X POST http://kingsly.host/v1/cert_bundles \
 ## TODO
 
 - check for ACME account creation without email id (maybe initialize account only once?)
+- tracks if the client has the updated cert  (WIP: [#5](https://github.com/gojekfarm/kingsly/issues/5))
+
+## License
+
+Apache License 2.0
