@@ -5,7 +5,7 @@ all: .env build prepare_db run
 prepare_db: create_db migrate
 
 .env:
-	[[ ! -f ".env"  ]] && cp -n .env.sample .env
+	[ ! -f .env  ] && cp -n .env.sample .env
 	@echo "\nPlease update you .env file with proper values."
 
 build:

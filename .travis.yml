@@ -1,6 +1,10 @@
 language: ruby
+
 rvm:
   - 2.3.3
+
+cache:
+  bundler: true
 
 services:
   - docker
@@ -9,7 +13,7 @@ before_script:
   - docker-compose --version
 
 script:
-  - make .env rspec
+  - time make .env rspec
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
