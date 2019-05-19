@@ -11,6 +11,8 @@ services:
 
 before_script:
   - docker-compose --version
+  # https://stackoverflow.com/q/27382295/3834059
+  - sudo /etc/init.d/postgresql stop
 
 script:
   - time make .env rspec
