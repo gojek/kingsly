@@ -5,6 +5,7 @@ ENV BUNDLE_PATH=/bundle \
     GEM_HOME=/bundle
 ENV PATH="${BUNDLE_BIN}:${PATH}"
 
+# https://superuser.com/q/1423486/366168
 RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
 
 RUN apt-get update \
