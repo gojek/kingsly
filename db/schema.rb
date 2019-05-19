@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2018_12_28_092556) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "v1_cert_bundles", force: :cascade do |t|
     t.text "private_key"
     t.text "full_chain"

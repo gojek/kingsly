@@ -4,16 +4,12 @@ rvm:
 
 services:
   - docker
-  - postgresql
 
 before_script:
-  - psql -c 'create database kingsly_test;' -U postgres
-  - cp config/application.yml.ci config/application.yml
-  - bundle exec rake db:create db:migrate
+  - docker-compose --version
 
 script:
-  - bundle
-  - bundle exec rspec
+  - make .env rspec
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
