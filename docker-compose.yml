@@ -1,4 +1,5 @@
 version: '3'
+
 services:
   kingsly-server:
     build:
@@ -6,7 +7,9 @@ services:
     ports:
      - "8080:8080"
     depends_on:
-     - sqlite
+     - postgres
+    env_file:
+      - .env
     volumes:
      - ./:/usr/src/app
      - 'bundle_cache:/bundle'
@@ -14,19 +17,21 @@ services:
     - RAILS_ENV=development
     working_dir: /usr/src/app
     entrypoint: [/docker-entrypoint.sh]
-    command: ["bundle", "exec", "rails", "s", "-p", "8080", "-b", "0.0.0.0"]
+    command: >
+      bash -c "rails db:create db:migrate
+      && bundle exec rails s -p 8080 -b 0.0.0.0"
     tty: true
     stdin_open: true
 
-  sqlite:
-      image: nouchka/sqlite3
-      ports:
-        - "5432:5432"
-      stdin_open: true
-      tty: true
-      volumes:
-         - ./db/:/root/db/
-volumes:
-  sqlite:
-  bundle_cache:
+  postgres:
+    image: postgres
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/:/root/db/
 
+volumes:
+  postgres:
+  bundle_cache:
