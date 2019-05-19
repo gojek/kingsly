@@ -14,11 +14,38 @@ An attempt to automate SSL certs management. This Cert manager helps generate SS
 
 ## Dev Setup
 
-- Install all dependencies: `bundle install`
-- Copy config: `cp config/application.yml.sample config/application.yml`
-- Edit file `config/application.yml` with relevant config
-- Run migrations: `rake db:create db:migrate`
-- Start server: `rails server`
+#### Install docker-compose
+
+If you're on OS X, please follow the instructions to install [docker](https://docs.docker.com/docker-for-mac/install/).
+Or if you're on a Unix based distribution, you can follow the instructions [here](https://docs.docker.com/compose/install/) to install docker-compose.
+
+```
+# For Linux based machines
+$ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-
+$ sudo chmod +x /usr/local/bin/docker-compose
+```
+
+- Run `$ make .env` to create `.env` for the application from `.env.sample`
+
+#### Opening the web interface on your dev machine
+
+```
+$ make run
+```
+
+You can then open `localhost:8080`
+
+#### To stop the docker containers
+
+```
+$ make down
+```
+
+#### Running the specs
+
+```
+$ make rspec
+```
 
 ## Example APIs
 
@@ -49,6 +76,7 @@ curl -X POST http://kingsly.host/v1/cert_bundles \
 
 ## License
 
+```
 Copyright 2018, GO-JEK Tech <http://gojek.tech>
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -62,3 +90,4 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+```
