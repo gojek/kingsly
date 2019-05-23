@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.allow-http: "false"
+  labels:
+    app: kingsly
+  name: kingsly
+  namespace: kingsly
+spec:
+  rules:
+  - host: kingsly.example.com
+    http:
+      paths:
+      - backend:
+          serviceName: kingsly
+          servicePort: 80
+  tls:
+  - hosts:
+    - kingsly.example.com
+    secretName: exampledotcom

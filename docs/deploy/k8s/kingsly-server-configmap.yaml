@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kingsly
+  namespace: kingsly
+data:
+  ACME_CLIENT_CONTACT: mailto:foo@example.com
+  ACME_CLIENT_DIR: https://acme-v02.api.letsencrypt.org/directory
+  ACME_CLIENT_PRIVATE_KEY: |-
+    -----BEGIN RSA PRIVATE KEY-----
+    foo=
+    -----END RSA PRIVATE KEY-----
+  ACME_KID: https://acme-v02.api.letsencrypt.org/acme/acct/12345
+  AWS_ACCESS_KEY_ID: bar
+  AWS_REGION: ap-east-1
+  AWS_SECRET_ACCESS_KEY: johndoe
+  CERT_BUNDLE_EXPIRY_BUFFER_IN_DAYS: "15"
+  CERT_BUNDLE_RENEWAL_PERIOD_IN_SECONDS: "86400"
+  DB_HOST: postgres.kingsly.example.com
+  DB_NAME: kingsly_db
+  DB_PASSWORD: foobar
+  DB_TIMEOUT: "5000"
+  DB_USERNAME: kingsly_db_user
+  KUBERNETES_REPLICAS: ""
+  PASSWORD: foorailsbasicauthpassword
+  RAILS_ENV: production
+  RAILS_MASTER_KEY: 123123123123asdsd
+  RAILS_SERVE_STATIC_FILES: "true"
+  USERNAME: foorailsbasicauthusername

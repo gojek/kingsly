@@ -69,6 +69,10 @@ curl -X POST http://kingsly.host/v1/cert_bundles \
 }'
 ```
 
+## Deploying
+
+Please refer to [deployment](https://github.com/gojekfarm/kingsly/tree/master/docs) docs here 
+
 ## TODO
 
 - check for ACME account creation without email id (maybe initialize account only once?)
