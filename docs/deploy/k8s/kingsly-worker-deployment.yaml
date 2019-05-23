@@ -28,7 +28,7 @@ spec:
         - clock.rb
         envFrom:
         - configMapRef:
-            name: kingsly-worker
+            name: kingsly
         image: gojekfarm/kingsly:63748ae706584dc5cb8ae624ffc15a3dc487888d
         imagePullPolicy: IfNotPresent
         name: kingsly-worker
