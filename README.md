@@ -30,7 +30,7 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 #### Opening the web interface on your dev machine
 
 ```
-$ make run
+$ make docker.start
 ```
 
 You can then open `localhost:8080`
@@ -38,7 +38,7 @@ You can then open `localhost:8080`
 #### To stop the docker containers
 
 ```
-$ make down
+$ make docker.stop
 ```
 
 #### Running the specs
