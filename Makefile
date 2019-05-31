@@ -1,6 +1,6 @@
 .PHONY: all prepare_db build run start restart stop migrate create_db drop_db down kill logs ps rspec
 
-all: .env build prepare_db run
+all: .env build prepare_db docker.start
 
 prepare_db: create_db migrate
 
@@ -12,7 +12,7 @@ build:
 	@echo "\nBuilding kingsly\n"
 	docker-compose build
 
-run:
+docker.start:
 	@echo "\nDaemonising docker containers\n"
 	docker-compose up -d
 
@@ -20,7 +20,7 @@ start:
 	@echo "\nStarting docker containers\n"
 	docker-compose start
 
-restart: stop build run
+restart: stop build docker.start
 
 stop:
 	@echo "\nStoping docker containers\n"
@@ -38,7 +38,7 @@ drop_db: stop
 	@echo "\nCleaning DB\n"
 	echo y | docker-compose rm -v postgres
 
-down: kill
+docker.stop: kill
 	@echo "\nRunning docker-compose down\n"
 	docker-compose down
 
@@ -54,7 +54,7 @@ logs:
 ps:
 	docker-compose ps
 
-rspec: down
+rspec: docker.stop
 	docker-compose run --rm kingsly-server \
 	  bash -c "RAILS_ENV=test; bundle exec rake db:drop db:create; bundle exec rake db:migrate; bundle exec rspec spec/"
-	make down
+	make docker.stop
