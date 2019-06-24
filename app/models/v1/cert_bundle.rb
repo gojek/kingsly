@@ -39,7 +39,7 @@ class V1::CertBundle < ApplicationRecord
       )
 
       # Assume certificate is made even if it's not logged
-      Rails.logger.error("[WARNING] Renewal effort not saved") unless V1::CertRecord.create(top_level_domain: top_level_domain)
+      Rails.logger.error("[WARNING] Cert record not saved") unless V1::CertRecord.create(top_level_domain: top_level_domain)
     rescue V1::CertRecord::OverprovisionError => error
       Rails.logger.error("[FAILED] TLD Cert: #{error.message}")
       self.errors.add(:tld_cert, message: "#{error.message}")
