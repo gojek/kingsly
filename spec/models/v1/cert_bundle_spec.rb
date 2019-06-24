@@ -22,7 +22,7 @@ RSpec.describe V1::CertBundle, type: :model do
     let(:private_key) { "-----BEGIN RSA PRIVATE KEY-----\nFOO...\n-----END RSA PRIVATE KEY-----\n" }
     let(:full_chain) { "-----BEGIN CERTIFICATE-----\nBAR...\n-----END CERTIFICATE-----\n" }
 
-    it "obtains a cert and stores to DB" do
+    it "obtains a cert, stores to DB, and record cert" do
       cert_bundle = V1::CertBundle.new(sub_domain: sub_domain, top_level_domain: top_level_domain)
 
       acme_service_dbl = double(AcmeService)
@@ -53,13 +53,15 @@ RSpec.describe V1::CertBundle, type: :model do
       persisted_cert_bundle = V1::CertBundle.find_by(sub_domain: sub_domain, top_level_domain: top_level_domain)
       expect(persisted_cert_bundle.private_key).to eq(private_key)
       expect(persisted_cert_bundle.full_chain).to eq(full_chain)
+
+      expect(V1::CertRecord.count).to eq(1)
     end
 
     context "when certs are already present for given sub domain and top level domain" do
       let(:renewed_private_key) { "renewd private key" }
       let(:renewed_full_chain) { "renewed full chain" }
 
-      it "renews and stores updated certs to DB if certs needs renewal" do
+      it "renews, stores updated certs to DB, and record certs if certs needs renewal" do
         cert_bundle = V1::CertBundle.create(sub_domain: sub_domain, top_level_domain: top_level_domain, private_key: private_key, full_chain: full_chain)
         expect(cert_bundle).to receive(:needs_renewal?).and_return(true)
         acme_service_dbl = double(AcmeService)
@@ -90,18 +92,34 @@ RSpec.describe V1::CertBundle, type: :model do
         renewed_cert_bundle = V1::CertBundle.find_by(sub_domain: sub_domain, top_level_domain: top_level_domain)
         expect(renewed_cert_bundle.private_key).to eq(renewed_private_key)
         expect(renewed_cert_bundle.full_chain).to eq(renewed_full_chain)
+
+        expect(V1::CertRecord.count).to eq(1)
       end
 
-      it "does not contact remote if certs does not needs renewal" do
+      it "does not contact remote, and does not record certs if certs does not needs renewal" do
         cert_bundle = V1::CertBundle.create(sub_domain: sub_domain, top_level_domain: top_level_domain, private_key: private_key, full_chain: full_chain)
         expect(cert_bundle).to receive(:needs_renewal?).and_return(false)
         expect(AcmeService).to receive(:new).never
         cert_bundle.obtain_or_renew
+
+        expect(V1::CertRecord.count).to eq(0)
+      end
+    end
+
+    context "when TLS cert overprovisioned" do
+      it "returns error and does not record cert" do
+        ENV['CERT_RECORD_LIMIT_COUNT'] = '1'
+        cert_record = V1::CertRecord.create(top_level_domain: top_level_domain)
+        cert_bundle = V1::CertBundle.new(sub_domain: sub_domain, top_level_domain: top_level_domain)
+        cert_bundle.obtain_or_renew
+
+        expect(cert_bundle.errors.full_messages).to eq(["Tld cert {:message=>\"TLD cert overprovisioned\"}"])
+        expect(V1::CertRecord.count).to eq(1)
       end
     end
 
     context "when AWS route53 updation failed" do
-      it "returns error" do
+      it "returns error and does not record cert" do
         cert_bundle = V1::CertBundle.new(sub_domain: sub_domain, top_level_domain: top_level_domain)
 
         acme_service_dbl = double(AcmeService)
@@ -121,11 +139,13 @@ RSpec.describe V1::CertBundle, type: :model do
         cert_bundle.obtain_or_renew
 
         expect(cert_bundle.errors.full_messages).to eq(["Route53 updation failed {:message=>\"Aws::Waiters::Errors::WaiterFailed\"}"])
+
+        expect(V1::CertRecord.count).to eq(0)
       end
     end
 
     context "when random errors occur" do
-      it "returns error" do
+      it "returns an error and does not record cert" do
         cert_bundle = V1::CertBundle.new(sub_domain: sub_domain, top_level_domain: top_level_domain)
 
         expect(AcmeService).to receive(:new).and_raise("random error")
@@ -133,22 +153,28 @@ RSpec.describe V1::CertBundle, type: :model do
         cert_bundle.obtain_or_renew
 
         expect(cert_bundle.errors.full_messages).to eq(["Standard error {:message=>\"random error\"}"])
+
+        expect(V1::CertRecord.count).to eq(0)
       end
     end
 
     context "when sub domain is not set" do
-      it "returns an error" do
+      it "returns an error and does not record cert" do
         cert_bundle = V1::CertBundle.new
         cert_bundle.obtain_or_renew
         expect(cert_bundle.errors.full_messages).to eq(["Sub domain {:message=>\"Cannot be empty\"}"])
+
+        expect(V1::CertRecord.count).to eq(0)
       end
     end
 
     context "when TLD is not set" do
-      it "returns an error" do
+      it "returns an error and does not record cert" do
         cert_bundle = V1::CertBundle.new(sub_domain: sub_domain)
         cert_bundle.obtain_or_renew
         expect(cert_bundle.errors.full_messages).to eq(["Top level domain {:message=>\"Cannot be empty\"}"])
+
+        expect(V1::CertRecord.count).to eq(0)
       end
     end
   end

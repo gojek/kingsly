@@ -12,6 +12,12 @@ class V1::CertBundle < ApplicationRecord
 
     begin
       fqdn = "#{sub_domain}.#{top_level_domain}"
+      rate_limit_range = ENV['CERT_RECORD_LIMIT_RANGE_IN_DAYS'] || 7
+      rate_limit_count = ENV['CERT_RECORD_LIMIT_COUNT'] || 50
+
+      current_time = Time.now
+      cert_record_count = V1::CertRecord.count_from_to(top_level_domain, current_time - rate_limit_range.to_i.days, current_time)
+      raise V1::CertRecord::OverprovisionError if cert_record_count >= rate_limit_count.to_i
 
       acme_service = AcmeService.new
       acme_service.create_order(fqdn)
@@ -31,6 +37,12 @@ class V1::CertBundle < ApplicationRecord
         private_key: cert_bundle[:private_key],
         full_chain: cert_bundle[:full_chain],
       )
+
+      # Assume certificate is made even if it's not logged
+      Rails.logger.error("[WARNING] Renewal effort not saved") unless V1::CertRecord.create(top_level_domain: top_level_domain)
+    rescue V1::CertRecord::OverprovisionError => error
+      Rails.logger.error("[FAILED] TLD Cert: #{error.message}")
+      self.errors.add(:tld_cert, message: "#{error.message}")
     rescue Aws::Waiters::Errors::WaiterFailed => error
       Rails.logger.error("[FAILED] AWS route53 record creation: #{error.message}")
       self.errors.add(:route53_updation_failed, message: "#{error.message}")
