@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_28_092556) do
+ActiveRecord::Schema.define(version: 2019_06_17_042653) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "v1_cert_bundles", force: :cascade do |t|
     t.text "private_key"
@@ -19,6 +22,12 @@ ActiveRecord::Schema.define(version: 2018_12_28_092556) do
     t.datetime "updated_at", null: false
     t.text "top_level_domain"
     t.text "sub_domain"
+  end
+
+  create_table "v1_cert_records", force: :cascade do |t|
+    t.string "top_level_domain"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
