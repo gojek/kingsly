@@ -21,11 +21,6 @@ table.table.table-striped
           = cert_bundle.updated_at + 3.months
         td
           = link_to 'Show', v1_cert_bundle_path(cert_bundle.id)
-        td
-          = link_to 'Create', v1_cert_bundle_path(cert_bundle.id)
-        td
-          = link_to 'Delete', v1_cert_bundle_path(cert_bundle.id), method: :delete, data: { confirm: 'Are you sure?' }
-
 
   #create_certificate.modal.fade[role="dialog"]
     .modal-dialog
