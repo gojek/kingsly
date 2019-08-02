@@ -6,6 +6,12 @@ table.table.table-striped
   thead
     tr
       th
-       | FQDN
+       | Private Key
       th
-       | Expiry Date
+       | Full Chain
+  tbody
+    tr
+      td
+        = @cert_bundle.private_key
+      td
+        = @cert_bundle.full_chain

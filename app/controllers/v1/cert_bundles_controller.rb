@@ -17,10 +17,6 @@ class V1::CertBundlesController < ApplicationController
   end
 
   def show
-
-  end
-
-  def delete
-
+    @cert_bundle = V1::CertBundle.find(params[:id])
   end
 end

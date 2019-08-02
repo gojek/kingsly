@@ -18,7 +18,7 @@ table.table.table-striped
         td
           = cert_bundle.sub_domain + '.' + cert_bundle.top_level_domain
         td
-          = cert_bundle.updated_at + 3.months
+          = (c.updated_at + 3.months - Time.now.utc).to_i/86400 days
         td
           = link_to 'Show', v1_cert_bundle_path(cert_bundle.id)
         td
