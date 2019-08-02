@@ -15,4 +15,12 @@ class V1::CertBundlesController < ApplicationController
       render status: 500, body: {message: 'error obtaining certs'}.to_json
     end
   end
+
+  def show
+
+  end
+
+  def delete
+
+  end
 end
