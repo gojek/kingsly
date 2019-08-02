@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  label:
+    create:
+      submit: 'submit'

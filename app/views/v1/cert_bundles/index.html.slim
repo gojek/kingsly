@@ -1,7 +1,10 @@
 br
 br
-h1
+h1[style="display:inline;"]
  | List of SSL Certificates
+.create-certificate[style="display:inline;float:right;"]
+  button.btn.btn-info.mb-1.ml-1[data-toggle="modal" data-target="#create_certificate"]
+    =t("create_certificate")
 table.table.table-striped
   thead
     tr
@@ -16,3 +19,32 @@ table.table.table-striped
           = cert_bundle.sub_domain + '.' + cert_bundle.top_level_domain
         td
           = cert_bundle.updated_at + 3.months
+        td
+          = link_to 'Show', v1_cert_bundle_path(cert_bundle.id)
+        td
+          = link_to 'Create', v1_cert_bundle_path(cert_bundle.id)
+        td
+          = link_to 'Delete', v1_cert_bundle_path(cert_bundle.id), method: :delete, data: { confirm: 'Are you sure?' }
+
+
+  #create_certificate.modal.fade[role="dialog"]
+    .modal-dialog
+      .modal-content
+        .modal-header
+          h4.modal-title
+            =t("modal.header.create_certificate")
+          button.close[type="button" data-dismiss="modal"]
+            | ×
+        .modal-body
+          = form_with url: v1_cert_bundles_path do |f|
+            = hidden_field_tag :authenticity_token, form_authenticity_token
+            .form-group
+              = label_tag(:name, t("label.top_level_domain"))
+              = text_field_tag(:top_level_domain,nil,{class: "form-control", placeholder: 'example: google.com'} )
+            .form-group
+              = label_tag(:name, t("label.sub_domain"))
+              = text_field_tag(:sub_domain,nil, {class: "form-control", placeholder: 'example: maps'} )
+            = submit_tag(t("label.create.submit"), {class: "btn btn-success", style: "float: right", data: { "disable-with": "Saving..." } })
+        .modal-footer
+          p#add_client_error.text-danger
+          p#add_client_notice.text-primary

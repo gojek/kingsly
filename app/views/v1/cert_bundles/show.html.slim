@@ -1,0 +1,17 @@
+br
+br
+h1
+ | Certificate for 
+table.table.table-striped
+  thead
+    tr
+      th
+       | Private Key
+      th
+       | Full Chain
+  tbody
+    tr
+      td
+        = @cert_bundle.private_key
+      td
+        = @cert_bundle.full_chain

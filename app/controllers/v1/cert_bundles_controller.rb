@@ -15,4 +15,8 @@ class V1::CertBundlesController < ApplicationController
       render status: 500, body: {message: 'error obtaining certs'}.to_json
     end
   end
+
+  def show
+    @cert_bundle = V1::CertBundle.find(params[:id])
+  end
 end
