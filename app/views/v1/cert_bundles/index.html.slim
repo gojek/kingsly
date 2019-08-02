@@ -37,12 +37,13 @@ table.table.table-striped
             | ×
         .modal-body
           = form_with url: v1_cert_bundles_path do |f|
+            = hidden_field_tag :authenticity_token, form_authenticity_token
             .form-group
               = label_tag(:name, t("label.top_level_domain"))
-              = text_field_tag(:name,nil,{class: "form-control"} )
+              = text_field_tag(:name,nil,{class: "form-control", placeholder: 'example: google.com'} )
             .form-group
               = label_tag(:name, t("label.sub_domain"))
-              = text_field_tag(:name,nil,{class: "form-control"} )
+              = text_field_tag(:name,nil, {class: "form-control", placeholder: 'example: maps'} )
             = submit_tag(t("label.create.submit"), {class: "btn btn-success", style: "float: right", data: { "disable-with": "Saving..." } })
         .modal-footer
           p#add_client_error.text-danger
