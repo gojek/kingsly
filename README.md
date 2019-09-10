@@ -1,6 +1,6 @@
 # Kingsly
 
-<p align="center"><img src="doc/Kingsly.png" width="360"></p>
+<p align="center"><img src="docs/Kingsly.png" width="360"></p>
 <p align="center">
   <a href="https://travis-ci.org/gojekfarm/kingsly"><img src="https://travis-ci.org/gojekfarm/kingsly.svg?branch=master" alt="Build Status"></img></a>
 </p>
