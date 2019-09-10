@@ -2,7 +2,7 @@
 
 <p align="center"><img src="docs/Kingsly.png" width="360"></p>
 <p align="center">
-  <a href="https://travis-ci.org/gojekfarm/kingsly"><img src="https://travis-ci.org/gojekfarm/kingsly.svg?branch=master" alt="Build Status"></img></a>
+  <a href="https://travis-ci.org/gojek/kingsly"><img src="https://travis-ci.org/gojek/kingsly.svg?branch=master" alt="Build Status"></img></a>
 </p>
 
 An attempt to automate SSL certs management. This Cert manager helps generate SSL certs, renews them automatically. [Release blog post](https://blog.gojekengineering.com/introducing-kingsly-the-cert-manager-ced40746aa65)
