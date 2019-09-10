@@ -15,6 +15,9 @@ RUN apt-get update \
     nodejs \
     npm -y
 
+RUN bundle check || bundle install --binstubs="$BUNDLE_BIN" \
+    && npm install yarn -g
+
 ADD . /usr/src/app
 WORKDIR /usr/src/app
 COPY ./docker-entrypoint.sh /
